@@ -22,13 +22,12 @@ export class UsrService {
   findOne(id: string): CreateUsrDto {
     this.logger.log('Find User Method Accessed!');
     // eslint-disable-next-line prettier/prettier
-    const usr: CreateUsrDto = this.users.filter(usr => usr.id === id)[0];
-    return usr;
+    return this.users.filter(usr => usr.id === id)[0];
   }
 
   update(id: string, updateUsrDto: UpdateUsrDto): UpdateUsrDto {
     this.logger.log('Update User Method Accessed!');
-    const usr: CreateUsrDto = this.findOne(updateUsrDto.id);
+    const usr: CreateUsrDto = this.findOne(id);
 
     usr.id = updateUsrDto.id;
     usr.name = updateUsrDto.name;
@@ -47,5 +46,4 @@ export class UsrService {
     this.users.splice(index, 1);
     return `User id: ${id}, successfully deleted`;
   }
-
 }

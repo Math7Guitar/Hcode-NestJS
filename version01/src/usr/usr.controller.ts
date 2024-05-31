@@ -31,12 +31,13 @@ export class UsrController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUsrDto: UpdateUsrDto) {
+  // eslint-disable-next-line prettier/prettier
+  update(@Param('id') id: string, @Body() updateUsrDto: UpdateUsrDto): UpdateUsrDto {
     return this.usrService.update(id, updateUsrDto);
   }
 
-  @Delete()
-  remove(@Query('id') id: string) {
+  @Delete(':id')
+  remove(@Param('id') id: string) {
     return this.usrService.remove(id);
   }
 }
