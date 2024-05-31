@@ -14,17 +14,19 @@ export class UsrService {
     return createUsrDto;
   }
 
-  findAll() {
+  findAll(): Array<CreateUsrDto> {
     this.logger.log('Get User List Method Accessed!');
-    return `This action returns all usr`;
+    return this.users;
   }
 
   findOne(id: string): CreateUsrDto {
     this.logger.log('Find User Method Accessed!');
-    return this.users.filter((usr) => usr.id === id)[0];
+    // eslint-disable-next-line prettier/prettier
+    const usr: CreateUsrDto = this.users.filter(usr => usr.id === id)[0];
+    return usr;
   }
 
-  update(id: number, updateUsrDto: UpdateUsrDto): UpdateUsrDto {
+  update(id: string, updateUsrDto: UpdateUsrDto): UpdateUsrDto {
     this.logger.log('Update User Method Accessed!');
     const usr: CreateUsrDto = this.findOne(updateUsrDto.id);
 
@@ -45,4 +47,5 @@ export class UsrService {
     this.users.splice(index, 1);
     return `User id: ${id}, successfully deleted`;
   }
+
 }

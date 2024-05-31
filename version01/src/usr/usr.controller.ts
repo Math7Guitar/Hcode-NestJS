@@ -22,9 +22,9 @@ export class UsrController {
   }
 
   @Get()
-  findOne(@Query('id') id: string) {
+  find(@Query('id') id: string): Array<CreateUsrDto> | CreateUsrDto {
     if (id) {
-      return this.usrService.findOne(+id);
+      return this.usrService.findOne(id);
     } else {
       return this.usrService.findAll();
     }
@@ -32,7 +32,7 @@ export class UsrController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUsrDto: UpdateUsrDto) {
-    return this.usrService.update(+id, updateUsrDto);
+    return this.usrService.update(id, updateUsrDto);
   }
 
   @Delete()
