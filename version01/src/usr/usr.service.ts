@@ -41,8 +41,8 @@ export class UsrService {
 
   remove(id: string) {
     this.logger.log('Delete User Method Accessed!');
-    const usr: CreateUsrDto = this.users.filter((usr) => usr.id === id)[0];
-    const index = this.users.indexOf(usr);
+    // eslint-disable-next-line prettier/prettier
+    const index = this.users.indexOf(this.users.filter((usr) => usr.id === id)[0]);
     this.users.splice(index, 1);
     return `User id: ${id}, successfully deleted`;
   }
