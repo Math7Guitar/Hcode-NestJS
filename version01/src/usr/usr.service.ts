@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, Logger } from '@nestjs/common';
 import { CreateUsrDto } from './dto/create-usr.dto';
 import { UpdateUsrDto } from './dto/update-usr.dto';
@@ -29,10 +30,10 @@ export class UsrService {
     this.logger.log('Update User Method Accessed!');
     const usr: CreateUsrDto = this.findOne(id);
 
-    usr.id = updateUsrDto.id;
-    usr.name = updateUsrDto.name;
-    usr.username = updateUsrDto.username;
-    usr.password = updateUsrDto.password;
+    updateUsrDto.id !== null ? usr.id = updateUsrDto.id : usr.id = usr.id;
+    updateUsrDto.name !== null ? usr.name = updateUsrDto.name : usr.name = usr.name;
+    updateUsrDto.username !== null ? usr.username = updateUsrDto.username : usr.username = usr.username;
+    updateUsrDto.password !== null ? usr.password = updateUsrDto.password : usr.password = usr.password;
 
     const index = this.users.indexOf(usr);
     this.users.splice(index, 1, usr);
