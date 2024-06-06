@@ -2,6 +2,9 @@ import {
   BadRequestException,
   Body,
   Controller,
+  FileTypeValidator,
+  MaxFileSizeValidator,
+  ParseFilePipe,
   Post,
   UploadedFile,
   UploadedFiles,
@@ -81,7 +84,18 @@ export class AuthController {
   @UseInterceptors(FileInterceptor('photo'))
   @UseGuards(AuthGuard)
   @Post('photo')
-  async uploadPhoto(@Usr() user, @UploadedFile() photo: Express.Multer.File) {
+  async uploadPhoto(
+    @Usr() user,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: 'image/png' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 100 }),
+        ],
+      }),
+    )
+    photo: Express.Multer.File,
+  ) {
     // eslint-disable-next-line prettier/prettier
     const path = join(__dirname, '..', '..', 'src', 'storage', 'photos', `photo-${ user.id }.png`);
 
