@@ -1,3 +1,4 @@
+DROP TABLE migrations;
 DROP TABLE usrs;
 
 -- SELECT * FROM usrs;
